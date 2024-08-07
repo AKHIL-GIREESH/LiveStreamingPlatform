@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const dbConnect = require("./DB/dbConnect");
+const authRouter = require("./Routes/User");
+app.use(express.json());
+app.use("/api/v1/auth/", authRouter);
 
 app.get("/", (req, res) => res.status(200).send("Backend"));
 
