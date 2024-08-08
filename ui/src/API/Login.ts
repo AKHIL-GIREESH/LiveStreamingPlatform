@@ -1,4 +1,4 @@
-import { UserLogin } from "@/types/User"
+import { UserLogin, User } from "@/types/User"
 
 export const LoginAPI = async (loginData: UserLogin) => {
     try {
@@ -13,8 +13,8 @@ export const LoginAPI = async (loginData: UserLogin) => {
         })
 
         const respJSON = await response.json();
-        console.log(respJSON)
-        return respJSON
+        const data: User = { _id: respJSON._id, username: respJSON.username, email: respJSON.email }
+        return data
     } catch (e) {
         console.log(e)
     }
