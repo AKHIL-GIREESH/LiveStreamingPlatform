@@ -17,7 +17,10 @@ const Login = () => {
     }
 
     const loginUser = useMutation({
-        mutationFn:() => LoginAPI(loginData)
+        mutationFn: async () => { 
+            await LoginAPI(loginData)
+            console.log("Works")
+        }
     })
 
     const loginFunc = () => {
