@@ -7,6 +7,7 @@ import { createBrowserRouter,RouterProvider } from "react-router-dom";
 import LandingPage from "@/Pages/LandingPage.tsx"
 import Login from "@/Pages/Login/Login"
 import SignUp from "./Pages/SignUp/SignUp";
+import AuthProvider from "./AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
+      <AuthProvider>
         <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

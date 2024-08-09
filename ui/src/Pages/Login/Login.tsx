@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { UserLogin } from "@/types/User"
+import { User, UserLogin } from "@/types/User"
 //import { Button } from "@/components/ui/button"
 import { useMutation } from "@tanstack/react-query"
 import { LoginAPI } from "@/API/Login"
+import { useSetAuth } from "@/AuthProvider"
 //import {useSetAuth} from "@/"
 
 
@@ -13,6 +14,8 @@ const Login = () => {
         password:""
     })
 
+    const setAuth = useSetAuth()
+
     //useSetAuth
 
     const updateCred = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -22,8 +25,9 @@ const Login = () => {
 
     const {mutate:loginUser,isPending,error} = useMutation({
         mutationFn: async () => { 
-            await LoginAPI(loginData)
+            const data = await LoginAPI(loginData)
             console.log("Works")
+            setAuth(data)
 
         }
     })

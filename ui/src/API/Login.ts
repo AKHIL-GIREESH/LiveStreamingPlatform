@@ -1,6 +1,6 @@
-import { UserLogin, User } from "@/types/User"
+import { UserLogin, User, UserCookie } from "@/types/User"
 
-export const LoginAPI = async (loginData: UserLogin) => {
+export const LoginAPI = async (loginData: UserLogin): Promise<UserCookie> => {
     try {
         console.log("Check1")
         console.log(JSON.stringify(loginData))
@@ -13,10 +13,12 @@ export const LoginAPI = async (loginData: UserLogin) => {
         })
 
         const respJSON = await response.json();
-        const data: User = { _id: respJSON._id, username: respJSON.username, email: respJSON.email }
-        return data
+        console.log(respJSON)
+        const { token, user } = respJSON
+        const data: User = { _id: user._id, username: user.username, email: user.email }
+        return { data, token: `Bearer ${token}` }
     } catch (e) {
-        console.log(e)
+        throw new Error("Failed to login, " + e);
     }
 
 }
