@@ -46,4 +46,17 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { regSignUp, login };
+const getUser = async (req,res) => {
+  try{
+    const authHeader = req.headers.authorization
+    const token = authHeader.split(" ")[1]
+    const decodedToken = jwt.verify(token,process.env.secret)
+    //console.log(user)
+    const user = await REGUSER.findOne({_id:decodedToken.id})
+    res.status(200).json({Status:"success",user:user})
+  }catch(e){
+    res.status(500).json({ Status: "Failed", Err: e });
+  }
+}
+
+module.exports = { regSignUp, login, getUser };
