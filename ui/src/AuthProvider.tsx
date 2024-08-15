@@ -5,11 +5,13 @@ import {User,UserContextType,UserCookie} from "@/types/User"
 
 const AuthContext = createContext<null | UserContextType>(null);
 
-const AuthProvider = ({ children }:React.PropsWithChildren) => {
+export default function AuthProvider({ children }:React.PropsWithChildren){
   const [user, setUser] = useState<null | User>(null);
   //const queryClient = useQueryClient()
 
   console.log("State :",user,setUser)
+
+  console.log("hi",user)
 
   let UserContext:UserContextType = {
     user:user,
@@ -34,18 +36,35 @@ export const useSetAuth = () => {
     throw new Error("Not initialised")
   }
   
-  const {user,update} = context
   const setAuth = ({ data, token }:UserCookie) => {
+    const {update} = context
     if (data === undefined) {
       throw new Error("Provide user");
     }
     update(data);
     Cookies.set("token", token, { expires: 30 });
-    console.log(user)
-    
   };
 
   return setAuth;
 };
 
-export default AuthProvider
+export const useUser = () => {
+  const context = useContext(AuthContext)
+  if(context === null){
+    return null
+  }else{
+    const {user} = context
+    console.log(context)
+    return user
+  }
+}
+
+export const useGetUser = () => {
+  const token = Cookies.get("token")
+  console.log(token)
+
+  // const user = useQuery({
+  //   queryKey:["User"],
+  //   queryFn: 
+  // })
+}

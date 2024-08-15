@@ -4,6 +4,7 @@ import { User, UserLogin } from "@/types/User"
 import { useMutation } from "@tanstack/react-query"
 import { LoginAPI } from "@/API/Login"
 import { useSetAuth } from "@/AuthProvider"
+import { useNavigate } from "react-router"
 //import {useSetAuth} from "@/"
 
 
@@ -15,6 +16,7 @@ const Login = () => {
     })
 
     const setAuth = useSetAuth()
+    const navi = useNavigate()
 
     //useSetAuth
 
@@ -28,7 +30,7 @@ const Login = () => {
             const data = await LoginAPI(loginData)
             console.log("Works")
             setAuth(data)
-
+            navi("/", { replace: true });
         }
     })
 
