@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { User } from "@/types/User";
 
-export const getUser = async () => {
+export const getUser = async (): Promise<User> => {
     try {
         const token = Cookies.get("token")
         console.log(token)
