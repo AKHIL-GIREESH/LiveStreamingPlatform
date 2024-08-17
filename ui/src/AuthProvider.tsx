@@ -1,7 +1,8 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext, useEffect,useMemo } from "react";
 import Cookies from "js-cookie"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {User,UserContextType,UserCookie} from "@/types/User"
+import { getUser } from "./API/getUser";
 
 const AuthContext = createContext<null | UserContextType>(null);
 
@@ -11,12 +12,31 @@ export default function AuthProvider({ children }:React.PropsWithChildren){
 
   console.log("State :",user,setUser)
 
-  console.log("hi",user)
+  //const queryClient = useQueryClient()
 
-  let UserContext:UserContextType = {
-    user:user,
-    update:setUser
+    const {data,error} = useQuery({
+    queryKey:["User"],
+    queryFn: async () => {
+        const theUser = await getUser()
+        console.log(theUser)
+        return theUser
+    }
+  })
+  // console.log("userfunc",userFunc)
+  if(error){
+    throw new Error("Something went wrong"+error)
   }
+
+  useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [data]);
+
+  const UserContext = useMemo(() => ({
+    user: user,
+    update: setUser,
+  }), [user]);
 
   return (
     <AuthContext.Provider value={UserContext}>
@@ -59,12 +79,23 @@ export const useUser = () => {
   }
 }
 
-export const useGetUser = () => {
-  const token = Cookies.get("token")
-  console.log(token)
+// export const useGetUser = () => {
 
-  // const user = useQuery({
-  //   queryKey:["User"],
-  //   queryFn: 
-  // })
-}
+//   console.log("Check")
+  
+//   const {data,error,isFetching} = useQuery({
+//     queryKey:["User"],
+//     queryFn: getUser
+//   })
+
+//   while(isFetching){
+//     console.log("Fetching...")
+//   }
+//   if(error){
+//     throw new Error("Unable to fetch User for some reason")
+//   }else{
+//     console.log(data)
+//     return data
+//   }
+
+// }

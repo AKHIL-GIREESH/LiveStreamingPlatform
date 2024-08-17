@@ -4,6 +4,7 @@ import { User } from "@/types/User";
 export const getUser = async () => {
     try {
         const token = Cookies.get("token")
+        console.log(token)
         if (!token) {
             throw new Error("Token not found");
         }
