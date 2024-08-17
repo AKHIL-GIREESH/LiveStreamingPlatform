@@ -62,8 +62,9 @@ const getUser = async (req,res) => {
 const getAllUsers = async (req,res) => {
   try{
     const allUsers = await REGUSER.find({})
-    console.log(allUsers)
-    res.status(200).json({status:"Success",users:allUsers})
+    //console.log(allUsers)
+    let newAllUsers = allUsers.map(({_id,username,email,password,__v}) => ({_id,username,email}))
+    res.status(200).json({status:"Success",users:newAllUsers})
   }catch(e){
     res.status(500).json({ Status: "Failed", Err: e });
   }

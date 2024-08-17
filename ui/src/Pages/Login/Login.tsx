@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { User, UserLogin } from "@/types/User"
+import { UserLogin } from "@/types/User"
 //import { Button } from "@/components/ui/button"
 import { useMutation } from "@tanstack/react-query"
 import { LoginAPI } from "@/API/Login"

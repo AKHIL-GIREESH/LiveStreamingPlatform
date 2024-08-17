@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect,useMemo } from "react";
 import Cookies from "js-cookie"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery} from "@tanstack/react-query";
 import {User,UserContextType,UserCookie} from "@/types/User"
 import { getUser } from "./API/getUser";
 
