@@ -59,4 +59,14 @@ const getUser = async (req,res) => {
   }
 }
 
-module.exports = { regSignUp, login, getUser };
+const getAllUsers = async (req,res) => {
+  try{
+    const allUsers = await REGUSER.find({})
+    console.log(allUsers)
+    res.status(200).json({status:"Success",users:allUsers})
+  }catch(e){
+    res.status(500).json({ Status: "Failed", Err: e });
+  }
+}
+
+module.exports = { regSignUp, login, getUser, getAllUsers};
