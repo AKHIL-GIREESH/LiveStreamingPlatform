@@ -8,13 +8,14 @@ const AuthContext = createContext<null | UserContextType>(null);
 
 export default function AuthProvider({ children }:React.PropsWithChildren){
   const [user, setUser] = useState<null | User>(null);
+
   //const queryClient = useQueryClient()
 
   console.log("State :",user,setUser)
 
   //const queryClient = useQueryClient()
 
-    const {data,error} = useQuery({
+    const {data,isLoading} = useQuery({
     queryKey:["User"],
     queryFn: async () => {
         const theUser = await getUser()
@@ -23,9 +24,10 @@ export default function AuthProvider({ children }:React.PropsWithChildren){
     }
   })
   // console.log("userfunc",userFunc)
-  if(error){
-    throw new Error("Something went wrong"+error)
-  }
+
+  // if(error){
+  //   navi("/", { replace: true });
+  // }
 
   useEffect(() => {
     if (data) {
@@ -37,6 +39,10 @@ export default function AuthProvider({ children }:React.PropsWithChildren){
     user: user,
     update: setUser,
   }), [user]);
+
+  if(isLoading){
+    return(<h1>Loading...</h1>)
+  }
 
   return (
     <AuthContext.Provider value={UserContext}>
