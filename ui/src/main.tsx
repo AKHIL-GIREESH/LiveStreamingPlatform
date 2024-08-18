@@ -8,6 +8,7 @@ import LandingPage from "@/Pages/LandingPage.tsx"
 import Login from "@/Pages/Login/Login"
 import SignUp from "./Pages/SignUp/SignUp";
 import AuthProvider from "./AuthProvider";
+import ProfilePg from "./Pages/Profile/ProfilePg";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,15 @@ const router = createBrowserRouter([
   {
     path:"/SignUp",
     element:<SignUp/>
-  }
+  },
+  {
+    path:"/me",
+    element:<ProfilePg/>
+  },
+  // {
+  //   path:"/:id",
+  //   element
+  // }
 ])
 
 const queryClient = new QueryClient();

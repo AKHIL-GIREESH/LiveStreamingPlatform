@@ -1,5 +1,4 @@
 import React from "react"
-import { User } from "./User"
 
 export type WrapperProps = {
     children: React.ReactNode
@@ -7,5 +6,6 @@ export type WrapperProps = {
 
 export type UserItemProps = {
     id: string,
-    username: string
+    username: string,
+    isLive?: boolean
 }

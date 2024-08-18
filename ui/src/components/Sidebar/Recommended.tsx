@@ -10,10 +10,10 @@ const Recommended = () => {
     })
     return(
         <>
-            Recommended
+            Recommended<br/>
             {isLoading && <>Loading...</>}
             {error &&<>Refresh</>}
-            {data && data.map(({_id,username}) => (<UserItem id={_id} username={username}/>))}
+            {data && data.map(({_id,username}) => (<UserItem id={_id} username={username} isLive={true}/>))}
         </>
 
     )

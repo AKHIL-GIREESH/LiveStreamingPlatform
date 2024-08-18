@@ -4,7 +4,7 @@ import Wrapper from "./Wrapper"
 const Sidebar = () => {
     return(
         <Wrapper>
-            Sidebar
+            Sidebar<br/>
             <Recommended/>
         </Wrapper>
     )

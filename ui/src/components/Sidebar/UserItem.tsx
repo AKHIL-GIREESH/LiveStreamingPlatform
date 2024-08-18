@@ -1,9 +1,14 @@
 import { UserItemProps } from "@/types/Sidebar"
 
-const UserItem = ({id,username}:UserItemProps) => {
+const UserItem = ({isLive,username}:UserItemProps) => {
     return(
         <>
-            {username}
+            <button className={isLive?"border border-red-600 w-full":"border border-black w-full"}>
+                {username}
+                
+            </button>
+            <br/>
+            <br/>
         </>
     )
 }
