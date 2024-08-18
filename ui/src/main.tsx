@@ -9,6 +9,7 @@ import Login from "@/Pages/Login/Login"
 import SignUp from "./Pages/SignUp/SignUp";
 import AuthProvider from "./AuthProvider";
 import ProfilePg from "./Pages/Profile/ProfilePg";
+import StreamerPg from "./Pages/Streamer/SteamerPg";
 
 const router = createBrowserRouter([
   {
@@ -27,10 +28,10 @@ const router = createBrowserRouter([
     path:"/me",
     element:<ProfilePg/>
   },
-  // {
-  //   path:"/:id",
-  //   element
-  // }
+  {
+    path:"/:id",
+    element:<StreamerPg/>
+  }
 ])
 
 const queryClient = new QueryClient();
