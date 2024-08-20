@@ -15,7 +15,7 @@ export const LoginAPI = async (loginData: UserLogin): Promise<UserCookie> => {
         const respJSON = await response.json();
         console.log(respJSON)
         const { token, user } = respJSON
-        const data: User = { _id: user._id, username: user.username, email: user.email }
+        const data: User = { _id: user._id, username: user.username, email: user.email, followers: user.followers, following: user.following }
         return { data, token: `Bearer ${token}` }
     } catch (e) {
         throw new Error("Failed to login, " + e);

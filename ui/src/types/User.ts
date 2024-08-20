@@ -6,7 +6,9 @@ export type UserLogin = {
 export type User = {
     _id: string,
     username: string,
-    email: string
+    email: string,
+    following: string[],
+    followers: string[]
 }
 
 export type UserContextType = {

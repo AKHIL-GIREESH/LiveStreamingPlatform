@@ -18,7 +18,7 @@ export const getUser = async (): Promise<User> => {
         const respJSON = await response.json();
         console.log(respJSON)
         const { user } = respJSON
-        const data: User = { _id: user._id, username: user.username, email: user.email }
+        const data: User = { _id: user._id, username: user.username, email: user.email, followers: user.followers, following: user.following }
         return data
 
     } catch (e) {
