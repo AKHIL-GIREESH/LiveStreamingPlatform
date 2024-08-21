@@ -2,6 +2,7 @@ import { followFunc } from "@/API/Follow"
 import { useSetAuth } from "@/AuthProvider"
 import { Button } from "@/components/ui/button"
 import { useMutation } from "@tanstack/react-query"
+import { Loader2 } from "lucide-react"
 
 const FollowButton = ({id}:{id:string}) => {
 
@@ -15,11 +16,18 @@ const FollowButton = ({id}:{id:string}) => {
         }
     })
 
-    
+    if(isPending){
+        return(
+            <Button disabled>
+                Loading
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            </Button>
+        )
+    }
 
     return(
         <Button onClick={() => follow()}>
-            {isPending?"Loading..":error?"Retry":"Follow"}
+            {error?"Retry":"Follow"}
         </Button>
     )
 }
