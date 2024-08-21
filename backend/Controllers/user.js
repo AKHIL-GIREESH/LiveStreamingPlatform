@@ -74,12 +74,14 @@ const getAllUsers = async (req,res) => {
 const follow = async (req,res) => {
   try{
     const userID = req.user.id
-    const followID = req.body.followID
+    const followID = req.params.id
 
-    const updatedUser = await REGUSER.findOneAndUpdate({_id:userID},{ $push: { following: followID } },{new: true, runValidators: true})
-    const updatedFollower = await REGUSER.updateOne({_id:followID},{ $push: { followers: userID } })
+    let updatedUser = await REGUSER.findOneAndUpdate({_id:userID},{ $push: { following: followID } },{new: true, runValidators: true})
+    await REGUSER.updateOne({_id:followID},{ $push: { followers: userID } })
 
-    console.log(updatedFollower)
+    const {_id,username,email,followers,following} = updatedUser
+    updatedUser = {id:_id,username:username,email:email,followers:followers,following:following}
+    
     res.status(200).send({Status:"Success",user:updatedUser})
 
   }catch(e){

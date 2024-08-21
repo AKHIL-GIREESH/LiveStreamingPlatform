@@ -14,7 +14,7 @@ const StreamerPg = () => {
     return(
         <div>
             {id}<br/>
-            {condition === null?<Button disabled={true}>Login to Follow</Button>:condition?<Button disabled={true}>Following</Button>:<FollowButton/>}
+            {condition === null?<Button disabled={true}>Login to Follow</Button>:condition?<Button disabled={true}>Following</Button>:<FollowButton id={id}/>}
         </div>
     )
 }

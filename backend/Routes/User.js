@@ -5,6 +5,6 @@ const AuthMiddleware = require("../middleware/auth")
 router.route("/").post(regSignUp).get(AuthMiddleware,getAllUsers);
 router.route("/login").post(login);
 router.route("/getSelf").get(getUser);
-router.route("/follow").patch(AuthMiddleware,follow)
+router.route("/follow/:id").patch(AuthMiddleware,follow)
 
 module.exports = router;

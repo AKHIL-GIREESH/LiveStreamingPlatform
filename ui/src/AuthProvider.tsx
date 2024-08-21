@@ -62,13 +62,12 @@ export const useSetAuth = () => {
     throw new Error("Not initialised")
   }
   
-  const setAuth = ({ data, token }:UserCookie) => {
+  const setAuth = (data:User) => {
     const {update} = context
     if (data === undefined) {
       throw new Error("Provide user");
     }
     update(data);
-    Cookies.set("token", token, { expires: 30 });
   };
 
   return setAuth;

@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 import { LoginAPI } from "@/API/Login"
 import { useSetAuth } from "@/AuthProvider"
 import { useNavigate } from "react-router"
+import Cookies from "js-cookie"
 //import {useSetAuth} from "@/"
 
 
@@ -17,6 +18,7 @@ const Login = () => {
 
     const setAuth = useSetAuth()
     const navi = useNavigate()
+    
 
     //useSetAuth
 
@@ -27,9 +29,10 @@ const Login = () => {
 
     const {mutate:loginUser,isPending,error} = useMutation({
         mutationFn: async () => { 
-            const data = await LoginAPI(loginData)
+            const {data,token} = await LoginAPI(loginData)
             console.log("Works")
             setAuth(data)
+            Cookies.set("token", token, { expires: 30 });
             navi("/", { replace: true });
         }
     })
