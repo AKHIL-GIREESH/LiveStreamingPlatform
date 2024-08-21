@@ -71,4 +71,20 @@ const getAllUsers = async (req,res) => {
   }
 }
 
-module.exports = { regSignUp, login, getUser, getAllUsers};
+const follow = async (req,res) => {
+  try{
+    const userID = req.user.id
+    const followID = req.body.followID
+
+    const updatedUser = await REGUSER.findOneAndUpdate({_id:userID},{ $push: { following: followID } },{new: true, runValidators: true})
+    const updatedFollower = await REGUSER.updateOne({_id:followID},{ $push: { followers: userID } })
+
+    console.log(updatedFollower)
+    res.status(200).send({Status:"Success",user:updatedUser})
+
+  }catch(e){
+    res.status(500).json({Status:"Failed",Err:e})
+  }
+}
+
+module.exports = { regSignUp, login, getUser, getAllUsers,follow};
