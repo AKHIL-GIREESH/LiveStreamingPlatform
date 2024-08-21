@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useParams } from "react-router"
 import FollowButton from "./FollowButton"
 import { useFollowCheck } from "@/Hooks/FollowCheck"
+import UnfollowButton from "./UnfollowButton"
 
 const StreamerPg = () => {
     const {id} = useParams()
@@ -14,7 +15,7 @@ const StreamerPg = () => {
     return(
         <div>
             {id}<br/>
-            {condition === null?<Button disabled={true}>Login to Follow</Button>:condition?<Button disabled={true}>Following</Button>:<FollowButton id={id}/>}
+            {condition === null?<Button disabled={true}>Login to Follow</Button>:condition?<UnfollowButton id={id}/>:<FollowButton id={id}/>}
         </div>
     )
 }

@@ -89,4 +89,22 @@ const follow = async (req,res) => {
   }
 }
 
-module.exports = { regSignUp, login, getUser, getAllUsers,follow};
+const unfollow = async (req,res) => {
+  try{
+    const userID = req.user.id
+    const unfollowID = req.params.id
+
+    let updatedUser = await REGUSER.findOneAndUpdate({_id:userID},{ $pull: { following: unfollowID } },{new: true, runValidators: true})
+    await REGUSER.updateOne({_id:unfollowID},{ $pull: { followers: userID } })
+
+    const {_id,username,email,followers,following} = updatedUser
+    updatedUser = {id:_id,username:username,email:email,followers:followers,following:following}
+    
+    res.status(200).send({Status:"Success",user:updatedUser})
+
+  }catch(e){
+    res.status(500).json({Status:"Failed",Err:e})
+  }
+}
+
+module.exports = { regSignUp, login, getUser, getAllUsers, follow, unfollow };
