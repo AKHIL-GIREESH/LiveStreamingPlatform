@@ -1,24 +1,20 @@
-import { useUser } from "@/AuthProvider"
 import { Button } from "@/components/ui/button"
 import { useParams } from "react-router"
+import FollowButton from "./FollowButton"
+import { useFollowCheck } from "@/Hooks/FollowCheck"
 
 const StreamerPg = () => {
     const {id} = useParams()
-    console.log(id)
-    let condition:boolean = false
-    const user = useUser()
-    if(user !== null){
-        for(let i=0;i<user.following.length;i++){
-            if(id === user.following[i]){
-                condition = true
-                break
-            }
-        }
+    
+    if(id === undefined){
+        throw new Error("User not found")
     }
+
+    let condition = useFollowCheck(id)
     return(
         <div>
-            {id}
-            {user === null?"Login to Follow":condition?"Following":"Follow"}
+            {id}<br/>
+            {condition === null?<Button disabled={true}>Login to Follow</Button>:condition?<Button disabled={true}>Following</Button>:<FollowButton/>}
         </div>
     )
 }
