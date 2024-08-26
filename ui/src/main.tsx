@@ -10,6 +10,9 @@ import SignUp from "./Pages/SignUp/SignUp";
 import AuthProvider from "./AuthProvider";
 import ProfilePg from "./Pages/Profile/ProfilePg";
 import StreamerPg from "./Pages/Streamer/SteamerPg";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Stream from "./Pages/Dashboard/Stream/Stream";
+import Chat from "./Pages/Dashboard/Chat/Chat";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,20 @@ const router = createBrowserRouter([
   {
     path:"/:id",
     element:<StreamerPg/>
+  },
+  {
+    path:"/me/dashboard",
+    element:<Dashboard/>,
+    children:[
+      {
+        path:"/me/dashboard/stream",
+        element:<Stream/>
+      },
+      {
+        path:"/me/dashboard/chat",
+        element:<Chat/>
+      }
+    ]
   }
 ])
 

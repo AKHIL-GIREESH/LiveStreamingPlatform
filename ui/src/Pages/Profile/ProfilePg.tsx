@@ -9,7 +9,6 @@ const ProfilePg = () => {
     }
     return(
         <div>
-            
             {user.username}<br/>
             {user.email}<br/>
         </div>
