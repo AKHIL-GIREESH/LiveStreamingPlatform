@@ -39,7 +39,10 @@ const StreamSchema = new mongoose.Schema({
     },
     userID:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"users"
+        ref:"users",
+        unique:true,
+        required:true,
+        index: true
     }
 }, {
     timestamps: true
