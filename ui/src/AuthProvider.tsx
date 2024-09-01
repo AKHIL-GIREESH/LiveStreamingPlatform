@@ -1,7 +1,6 @@
-import React, { createContext, useState, useContext, useEffect,useMemo } from "react";
-import Cookies from "js-cookie"
+import React, { createContext, useState, useContext,useMemo,useEffect } from "react";
 import { useQuery} from "@tanstack/react-query";
-import {User,UserContextType,UserCookie} from "@/types/User"
+import {User,UserContextType} from "@/types/User"
 import { getUser } from "./API/getUser";
 
 const AuthContext = createContext<null | UserContextType>(null);

@@ -1,7 +1,10 @@
+import { useUser } from "@/AuthProvider"
+
 const Stream = () => {
+    const user = useUser()
     return(
         <>
-            Stream
+            {user && user._id}'s Stream
         </>
     )
 }

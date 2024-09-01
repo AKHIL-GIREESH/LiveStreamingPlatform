@@ -29,9 +29,11 @@ const updateStream = async(req,res) => {
 const getStream = async(req,res) => {
     try{
         const userID = req.params.id
-        const stream = await Stream.find({userID:userID})
+        const {name,thumbnailURL,isLive,isChatEnabled,isChatDelayed,isChatFollowersOnly} = await Stream.findOne({userID:userID})
+        const stream = {name,thumbnailURL,isLive,isChatEnabled,isChatDelayed,isChatFollowersOnly}
         res.status(200).json({status:"Success",
         stream:stream})
+
     }catch(e){
         res.status(500).json({status:"Failed",Err:e})
     }
