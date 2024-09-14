@@ -40,11 +40,11 @@ const router = createBrowserRouter([
     element:<Dashboard/>,
     children:[
       {
-        path:"/me/dashboard/stream",
+        path:"stream",
         element:<Stream/>
       },
       {
-        path:"/me/dashboard/chat",
+        path:"chat",
         element:<Chat/>
       }
     ]

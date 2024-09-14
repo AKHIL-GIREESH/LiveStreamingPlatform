@@ -10,6 +10,7 @@ export const useStream = (user: User | null) => {
             queryFn: async () => {
                 console.log(user)
                 if (user)
+
                     return await getUserStream(user._id)
             },
             enabled: !!user
