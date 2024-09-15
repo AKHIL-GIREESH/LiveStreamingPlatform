@@ -1,37 +1,46 @@
+import { updateStream } from "@/API/updateStream"
+import { useUser } from "@/AuthProvider"
 import { Switch } from "@/components/ui/switch"
 import { useGetStream } from "@/StreamContext"
+import { Stream, StreamChat } from "@/types/Stream"
 import { useMutation } from "@tanstack/react-query"
 
 const Chat = () => {
 
     const stream = useGetStream()
+    const user = useUser()
     console.log(stream)
 
-    if(stream === null){
+    if((stream  === null) || (user === null)){
         return
     }
 
     const {isChatDelayed,isChatEnabled,isChatFollowersOnly} = stream
 
-    const updateStreamHandler = (name : string,e :any) => {
+    const {mutate,isPending,error} = useMutation({
+        mutationFn: async (newStreamData : StreamChat) => { 
+            const newStream = await updateStream(user._id,newStreamData)
+
+        }
+    })
+
+    const updateStreamHandler = (n : keyof Stream) => {
+        console.log({[n]:stream[n]?false:true})
+
+        mutate({[n]:stream[n]?false:true})
+
 
         
-
-        const {mutate,isPending,error} = useMutation({
-            mutationFn: async () => { 
-                
-            }
-        })
         
-        mutate()
+        
     }
 
     return(
     <>
         Chat
-       <Switch checked={isChatDelayed} onClick={(e) => updateStreamHandler("isChatDelayed",e) }></Switch>
-       <Switch checked={isChatEnabled} onClick={(e) => updateStreamHandler("isChatEnabled",e)}></Switch>
-       <Switch checked={isChatFollowersOnly} onClick={(e) => updateStreamHandler("isChatFollowersOnly",e)}></Switch>
+       <Switch checked={isChatDelayed} onClick={() => updateStreamHandler("isChatDelayed") }></Switch>
+       <Switch checked={isChatEnabled} onClick={() => updateStreamHandler("isChatEnabled")}></Switch>
+       <Switch checked={isChatFollowersOnly} onClick={() => updateStreamHandler("isChatFollowersOnly")}></Switch>
     </>
     )
 }

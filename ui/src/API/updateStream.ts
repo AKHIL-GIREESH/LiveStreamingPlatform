@@ -1,6 +1,6 @@
-import { StreamChat } from "@/types/Stream"
+import { Stream, StreamChat } from "@/types/Stream"
 
-export const updateStream = async (id: string, streamData: StreamChat) => {
+export const updateStream = async (id: string, streamData: StreamChat): Promise<Stream> => {
     try {
         const response = await fetch(`http://localhost:3000/api/v1/stream/${id}`,
             {
@@ -13,9 +13,9 @@ export const updateStream = async (id: string, streamData: StreamChat) => {
 
         const respJSON = await response.json();
         console.log(respJSON)
-
+        return respJSON.stream
 
     } catch (e) {
-        console.log("Error = " + e)
+        throw new Error("Error = " + e)
     }
 }
