@@ -18,7 +18,8 @@ const CreateStream = async (req,res) => {
 const updateStream = async(req,res) => {
     try{
         const userID = req.params.id
-        const stream = await Stream.findOneAndUpdate({userID:userID},req.body,{new: true, runValidators: true})
+        const {name,thumbnailURL,isLive,isChatEnabled,isChatDelayed,isChatFollowersOnly} = await Stream.findOneAndUpdate({userID:userID},req.body,{new: true, runValidators: true})
+        const stream = {name,thumbnailURL,isLive,isChatEnabled,isChatDelayed,isChatFollowersOnly}
         res.status(200).json({status:"Success",
         stream:stream})
     }catch(e){
