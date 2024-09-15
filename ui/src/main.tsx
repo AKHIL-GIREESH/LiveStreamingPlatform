@@ -13,6 +13,7 @@ import StreamerPg from "./Pages/Streamer/SteamerPg";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Stream from "./Pages/Dashboard/Stream/Stream";
 import Chat from "./Pages/Dashboard/Chat/Chat";
+import StreamProvider from "./StreamContext";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
   },
   {
     path:"/me/dashboard",
-    element:<Dashboard/>,
+    element:(
+    <StreamProvider>
+      <Dashboard/>
+    </StreamProvider>
+    ),
     children:[
       {
         path:"stream",

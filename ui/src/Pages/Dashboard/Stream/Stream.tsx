@@ -1,10 +1,16 @@
-import { useUser } from "@/AuthProvider"
+//import { useUser } from "@/AuthProvider"
+import { useGetStream } from "@/StreamContext"
 
 const Stream = () => {
-    const user = useUser()
+    const stream = useGetStream()
+    console.log(stream)
+
+    if(stream === null){
+        throw new Error("Something went wrong")
+    }
     return(
-        <>
-            {user && user._id}'s Stream
+        <> 
+            {stream.name}
         </>
     )
 }

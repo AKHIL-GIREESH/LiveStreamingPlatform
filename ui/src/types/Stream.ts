@@ -4,3 +4,9 @@ export type StreamContextType = {
     stream: Stream | null,
     update: (stream: Stream | null) => void
 }
+
+export type StreamChat = {
+    isChatEnabled?: boolean,
+    isChatDelayed?: boolean,
+    isChatFollowersOnly?: boolean
+}
