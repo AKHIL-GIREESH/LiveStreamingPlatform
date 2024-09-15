@@ -41,9 +41,15 @@ const Chat = () => {
     return(
     <>
         Chat
+        <br/>
+        Chat Delayed
        <Switch checked={isChatDelayed} onClick={() => updateStreamHandler("isChatDelayed") }></Switch>
-       <Switch checked={isChatEnabled} onClick={() => updateStreamHandler("isChatEnabled")}></Switch>
-       <Switch checked={isChatFollowersOnly} onClick={() => updateStreamHandler("isChatFollowersOnly")}></Switch>
+       <br/>
+        Chat Enabled
+        <Switch checked={isChatEnabled} onClick={() => updateStreamHandler("isChatEnabled")}></Switch>
+        <br/>
+        Chat Followers Only
+        <Switch checked={isChatFollowersOnly} onClick={() => updateStreamHandler("isChatFollowersOnly")}></Switch>
     </>
     )
 }
