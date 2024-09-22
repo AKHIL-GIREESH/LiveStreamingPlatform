@@ -14,6 +14,11 @@ const DBSidebar = () => {
                     Chat
                 </Link>
             </Button>
+            <Button>
+                <Link to="./key">
+                    Key
+                </Link>
+            </Button>
         </div>
     )
 }

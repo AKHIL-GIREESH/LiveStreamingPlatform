@@ -14,6 +14,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Stream from "./Pages/Dashboard/Stream/Stream";
 import Chat from "./Pages/Dashboard/Chat/Chat";
 import StreamProvider from "./StreamContext";
+import Keys from "./Pages/Dashboard/Key/Key";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,12 @@ const router = createBrowserRouter([
       {
         path:"chat",
         element:<Chat/>
-      }
+      },
+      {
+        path:"key",
+        element:<Keys/>
+      },
+
     ]
   }
 ])

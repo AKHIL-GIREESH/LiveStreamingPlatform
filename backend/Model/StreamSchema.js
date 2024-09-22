@@ -11,15 +11,18 @@ const StreamSchema = new mongoose.Schema({
     },
     ingressID:{
         type:String,
-        minlength:1
+        minlength:1,
+        default:null
     },
     serverURL:{
         type:String,
-        minlength:1
+        minlength:1,
+        default:null
     },
     streamKey:{
         type:String,
-        minlength:1
+        minlength:1,
+        default:null
     },
     isLive:{
         type:Boolean,
