@@ -64,10 +64,10 @@ export const useSetStream = () => {
     
     const setStream = (data:Stream) => {
         const {update} = context
-        if (data === undefined) {
-        throw new Error("Provide stream");
-        }
+        if (data !== undefined) {
+        //throw new Error("Provide stream");
         update(data);
+        }
     };
 
     return setStream;
