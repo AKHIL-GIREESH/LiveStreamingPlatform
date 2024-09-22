@@ -1,4 +1,7 @@
 require('dotenv').config();
+const StreamSchema = require("../Model/StreamSchema")
+// const mongoose = require("mongoose")
+// const ObjectId = mongoose.Types.ObjectId;
 
 // Load LiveKit SDK modules once
 let LiveKitModules;
@@ -88,14 +91,28 @@ async function createIngress(ingressType, userId, username) {
     throw new Error('Failed to create ingress');
   }
 
-  return ingress;
+  const {ingressId,streamKey,url} = ingress
+
+  const stream = await StreamSchema.findOneAndUpdate({userID:userId},{
+    ingressID:ingressId,
+    serverURL:url,
+    streamKey:streamKey
+  },{new: true, runValidators: true})
+
+  console.log(ingress)
+
+  return stream;
+//   return ingress
 }
 
 // Express Route to create ingress
 const createLiveKitStuff = async (req, res) => {
   try {
-    const userId = req.body.userId; // Get userId from request (e.g., JWT or session)
-    const username = req.body.username;
+    //console.log(req.user)
+    const userId = req.user.id;
+    const username = req.user.username;
+
+    //console.log(req.params.id)
 
     // Get the ingressType correctly from the request body
     const { IngressInput } = await loadLiveKitModules();
