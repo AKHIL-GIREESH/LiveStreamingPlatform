@@ -4,11 +4,13 @@ require("dotenv").config();
 const dbConnect = require("./DB/dbConnect");
 const authRouter = require("./Routes/User");
 const streamRouter = require("./Routes/Stream")
+const webhookRouter = require("./Routes/webhook")
 const cors = require("cors")
 app.use(cors())
 app.use(express.json());
 app.use("/api/v1/auth/", authRouter);
 app.use("/api/v1/stream/",streamRouter);
+app.use("/api/v1/lkwebhook/",webhookRouter)
 
 app.get("/", (req, res) => res.status(200).send("Backend"));
 

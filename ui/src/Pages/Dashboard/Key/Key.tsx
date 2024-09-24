@@ -1,9 +1,7 @@
 import { updateKeyStream } from "@/API/updateKeyStream"
-import { updateStream } from "@/API/updateStream"
 import { useUser } from "@/AuthProvider"
 import { Button } from "@/components/ui/button"
 import { useGetStream, useSetStream } from "@/StreamContext"
-import { Stream } from "@/types/Stream"
 import { useMutation } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
 
