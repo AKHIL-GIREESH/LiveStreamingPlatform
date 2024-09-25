@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
+  isLive:{
+    type:Boolean,
+    default:false
+  },
   following:[{
     type: mongoose.Schema.Types.ObjectId,
     ref:"users"

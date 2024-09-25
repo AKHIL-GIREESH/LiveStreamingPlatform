@@ -24,10 +24,6 @@ const StreamSchema = new mongoose.Schema({
         minlength:1,
         default:null
     },
-    isLive:{
-        type:Boolean,
-        default:false
-    },
     isChatEnabled:{
         type:Boolean,
         default:true

@@ -64,7 +64,7 @@ const getAllUsers = async (req,res) => {
     const userID = req.user.id
     const allUsers = await REGUSER.find({_id:{$ne:userID}})
     //console.log(allUsers)
-    let newAllUsers = allUsers.map(({_id,username,email,password,__v}) => ({_id,username,email}))
+    let newAllUsers = allUsers.map(({_id,username,email,password,__v,isLive}) => ({_id,username,email,isLive}))
     res.status(200).json({status:"Success",users:newAllUsers})
   }catch(e){
     res.status(500).json({ Status: "Failed", Err: e });
@@ -79,8 +79,8 @@ const follow = async (req,res) => {
     let updatedUser = await REGUSER.findOneAndUpdate({_id:userID},{ $push: { following: followID } },{new: true, runValidators: true})
     await REGUSER.updateOne({_id:followID},{ $push: { followers: userID } })
 
-    const {_id,username,email,followers,following} = updatedUser
-    updatedUser = {id:_id,username:username,email:email,followers:followers,following:following}
+    const {_id,username,email,followers,following,isLive} = updatedUser
+    updatedUser = {id:_id,username:username,email:email,followers:followers,following:following,isLive:isLive}
     
     res.status(200).send({Status:"Success",user:updatedUser})
 
@@ -97,8 +97,8 @@ const unfollow = async (req,res) => {
     let updatedUser = await REGUSER.findOneAndUpdate({_id:userID},{ $pull: { following: unfollowID } },{new: true, runValidators: true})
     await REGUSER.updateOne({_id:unfollowID},{ $pull: { followers: userID } })
 
-    const {_id,username,email,followers,following} = updatedUser
-    updatedUser = {id:_id,username:username,email:email,followers:followers,following:following}
+    const {_id,username,email,followers,following,isLive} = updatedUser
+    updatedUser = {id:_id,username:username,email:email,followers:followers,following:following,isLive:isLive}
     
     res.status(200).send({Status:"Success",user:updatedUser})
 

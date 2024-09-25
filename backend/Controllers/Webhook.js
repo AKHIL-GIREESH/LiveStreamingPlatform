@@ -1,6 +1,7 @@
 //const { WebhookReceiver } = require('livekit-server-sdk');
 require('dotenv').config();
 const StreamSchema = require("../Model/StreamSchema")
+const UserSchema = require("../Model/UserSchema")
 
 let LiveKitModules;
 async function loadLiveKitModules() {
@@ -56,14 +57,18 @@ const webhook = async (req, res) => {
 
         //const event = await receiver.receive(req.body, req.get('Authorization'));
 
-        let state;
+        let state,changeState;
         if (event.event === "ingress_started") {
             // Mark the stream as live
-            state = await StreamSchema.findOneAndUpdate(
+            state = await StreamSchema.findOne(
                 { ingressID: event.ingressInfo.ingressId },
+            );
+
+            changeState = await UserSchema.findOneAndUpdate(
+                {_id:state.userID},
                 { isLive: true },
                 {new: true, runValidators: true}
-            );
+            )
 
 
         
@@ -71,15 +76,19 @@ const webhook = async (req, res) => {
 
         if (event.event === "ingress_ended") {
             // Mark the stream as not live
-            state = await StreamSchema.findOneAndUpdate(
+            state = await StreamSchema.findOne(
                 { ingressID: event.ingressInfo.ingressId },
+            );
+
+            changeState = await UserSchema.findOneAndUpdate(
+                {_id:state.userID},
                 { isLive: false },
                 {new: true, runValidators: true}
-            );
+            )
 
         }
 
-        console.log(state)
+        console.log(changeState)
 
         res.status(200).json({ message: "Webhook received successfully" });
     } catch (error) {
