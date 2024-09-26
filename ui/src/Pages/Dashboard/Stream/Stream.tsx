@@ -1,4 +1,5 @@
 //import { useUser } from "@/AuthProvider"
+import StreamPlayer from "@/components/streamplayer/streamPlayer"
 import { useGetStream } from "@/StreamContext"
 
 const Stream = () => {
@@ -11,6 +12,8 @@ const Stream = () => {
     return(
         <> 
             {stream.name}
+            Streamplayer with user,stream and following as props 
+            <StreamPlayer/> 
         </>
     )
 }

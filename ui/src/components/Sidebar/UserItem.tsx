@@ -5,9 +5,7 @@ const UserItem = ({isLive,username,id}:UserItemProps) => {
     return(
         <Link to={`/${id}`}>
             <button className={isLive?"border border-red-600 w-full":"border border-black w-full"}>
-                
                     {username}  
-                
             </button>
             <br/>
             <br/>

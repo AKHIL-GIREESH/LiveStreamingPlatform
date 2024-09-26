@@ -13,7 +13,7 @@ const Recommended = () => {
             Recommended<br/>
             {isLoading && <>Loading...</>}
             {error &&<>Refresh</>}
-            {data && data.map(({_id,username}) => (<UserItem id={_id} username={username} isLive={true}/>))}
+            {data && data.map(({_id,username,isLive}) => (<UserItem id={_id} username={username} isLive={isLive}/>))}
         </>
 
     )
