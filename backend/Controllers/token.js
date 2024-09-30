@@ -1,4 +1,3 @@
-//const { AccessToken } = require("livekit-server-sdk")
 require("dotenv")
 
 let LiveKitModules;
@@ -43,7 +42,8 @@ const createViewerToken = async (req,res) => {
     canPublishData: true,
     });
 
-    return await Promise.resolve(token.toJwt());
+    const userToken = await Promise.resolve(token.toJwt());
+    res.status(200).json({token:userToken})
 }
 
 module.exports = createViewerToken
