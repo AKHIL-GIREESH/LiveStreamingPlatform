@@ -7,8 +7,8 @@ export const getUserToken = async (id: string) => {
         if (!token) {
             token = "NoToken"
         }
-        const response = await fetch(`http://localhost:3000/api/v1/stream/${id}`, {
-            method: "POST",
+        const response = await fetch(`http://localhost:3000/api/v1/stream/viewerToken/${id}`, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": token
