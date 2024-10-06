@@ -1,6 +1,7 @@
 import { LiveKitRoom } from "@livekit/components-react";
 import { useViewerToken } from "@/Hooks/useViewerToken"
 import Video from "./videoPlayer";
+import Chat from "./Chat";
 
 
 const StreamPlayer = ({id,hostname}:{id:string,hostname:string}) => {
@@ -29,6 +30,7 @@ const StreamPlayer = ({id,hostname}:{id:string,hostname:string}) => {
                 {/* <Chat/> */}
             </div>
         </LiveKitRoom>
+        <Chat streamId={"1234"}/>
     </>)
 }
 
