@@ -4,11 +4,13 @@ import Video from "./videoPlayer";
 import Chat from "./Chat";
 
 
-const StreamPlayer = ({id,hostname}:{id:string,hostname:string}) => {
+const StreamPlayer = ({id,hostname,hostid}:{id:string,hostname:string,hostid:string}) => {
 
-    //const stream = 
+    
 
-    const {name,token,identity} = useViewerToken(id)
+    const {name,token,identity} = useViewerToken(hostid)
+
+    console.log(identity)
 
     if(!token || !name || !identity){
         return(
@@ -20,17 +22,20 @@ const StreamPlayer = ({id,hostname}:{id:string,hostname:string}) => {
      console.log(import.meta.env.VITE_LIVEKIT_API_URL)
 
     return(<>
+    <Chat streamId={hostid}/>
         <LiveKitRoom
+        audio={true}
+        video={true}
         token={token}
         serverUrl={import.meta.env.VITE_LIVEKIT_API_URL}>
             <div>
-                <Video hostName={hostname} hostIdentity={id}/>
+                <Video hostName={hostname} hostIdentity={hostid}/>
             </div>
             <div>
                 {/* <Chat/> */}
             </div>
         </LiveKitRoom>
-        <Chat streamId={"1234"}/>
+        
     </>)
 }
 

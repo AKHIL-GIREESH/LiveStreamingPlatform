@@ -30,7 +30,7 @@ const createViewerToken = async (req,res) => {
         process.env.LIVEKIT_API_KEY,
         process.env.LIVEKIT_API_SECRET,
         {
-          identity: isHost ? `Host-${self.id}` : self.id.toString(),
+          identity: isHost ? `Host-${self.id}` : self.id,
           name: self.username,
         }
       );

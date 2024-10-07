@@ -7,6 +7,7 @@ import {
 import { LiveVideo } from "./liveVideo";
 
 const Video = ({hostName,hostIdentity}:{hostName:string,hostIdentity:string}) => {
+    console.log(hostIdentity)
     const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
   const tracks = useTracks([
@@ -15,6 +16,8 @@ const Video = ({hostName,hostIdentity}:{hostName:string,hostIdentity:string}) =>
   ]).filter((track) => track.participant.identity === hostIdentity);
 
   let content;
+
+  console.log(participant)
 
   if (!participant && connectionState === ConnectionState.Connected) {
     content = <p>Host offline</p>;

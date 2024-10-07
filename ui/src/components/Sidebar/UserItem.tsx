@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const UserItem = ({isLive,username,id}:UserItemProps) => {
     return(
-        <Link to={`/${id}`}>
+        <Link to={`/${username}`}>
             <button className={isLive?"border border-red-600 w-full":"border border-black w-full"}>
                     {username}  
             </button>
