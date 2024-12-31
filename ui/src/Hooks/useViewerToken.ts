@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { jwtDecode, JwtPayload } from "jwt-decode"
-import { useQuery } from "@tanstack/react-query"
 import { getUserToken } from "@/API/getUserToken";
-import Cookies from "js-cookie";
 
 export const useViewerToken = (hostIdentity: string) => {
     const [token, setToken] = useState("")
